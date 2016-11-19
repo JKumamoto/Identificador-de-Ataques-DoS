@@ -11,21 +11,21 @@ VAR_OUTPUT
 END_VAR
 
 FUZZIFY hst
-	TERM baixo := (0.5, 0.08); 
-	TERM medio := (0.5, 0.8) (0.8,0.9);
-	TERM alto  := (0.8, 1.0);
+	TERM baixo := (0.5,1.0)(0.08,0); 
+	TERM medio := (0.5,0)(0.8,1.0)(0.9,0);
+	TERM alto  := (0.8,0.0)(1.0,1.0);
 END_FUZZIFY
 
 FUZZIFY ent
-	TERM baixo := (0.00001,0.002); 
-	TERM medio := (0.001, 0.002) (0.002,0.03);
-	TERM alto  := (0.002, 0.003);
+	TERM baixo := (0.00001,1.0)(0.002,0); 
+	TERM medio := (0.00001,0)(0.002,1.0)(0.003,0);
+	TERM alto  := (0.002,0)(0.003,1.0);
 END_FUZZIFY
 
 FUZZIFY brt
-	TERM baixo := (0.0, 12.0); 
-	TERM medio := (0.0, 12.0) (12.0, 22.0);
-	TERM alto  := (12.0, 25.0);
+	TERM baixo := (0.0, 1.0)(12.0,0.0); 
+	TERM medio := (0.0, 0.0)(12.0,1.0) (22.0,0.0);
+	TERM alto  := (12.0,0.0)(25.0,1.0);
 END_FUZZIFY
 	
 DEFUZZIFY tc			
