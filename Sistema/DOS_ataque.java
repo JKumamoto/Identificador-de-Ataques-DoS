@@ -8,20 +8,18 @@ public class DOS_ataque{
         
         String fileName = "fcl/dos_attack.fcl";
         FIS fis = FIS.load(fileName, true);
-
         JDialogFis jdf = new JDialogFis(fis, 800, 600);
         
 		Escritor saida=new Escritor("files/saida.csv");
 
-        //while (valServico < 9){
-		bitrate=5;
-		entropia=0.001;
-		hurst=0.9;
+			bitrate=5.33;
+			entropia=0.0000058996;
+			hurst=0.5264;
 
             // Evaluate system using these parameters
-            fis.getVariable("brt").setValue(bitrate);
-            fis.getVariable("ent").setValue(entropia);
             fis.getVariable("hst").setValue(hurst);
+            fis.getVariable("ent").setValue(entropia);
+            fis.getVariable("brt").setValue(bitrate);
             fis.evaluate();
 
             tc = fis.getVariable("tc").getValue();
