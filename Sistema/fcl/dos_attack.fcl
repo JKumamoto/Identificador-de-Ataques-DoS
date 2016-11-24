@@ -6,57 +6,57 @@ VAR_INPUT
 	hst : REAL;
 END_VAR
 
-VAR_OUTPUT	
+VAR_OUTPUT
 	tc : REAL;
 END_VAR
 
 FUZZIFY hst
-	TERM baixo := (0.5,1.0)(0.7,0); 
+	TERM baixo := (0.5,1.0)(0.7,0);
 	TERM medio := (0.5,0)(0.7,1.0)(0.9,0);
 	TERM alto  := (0.7,0.0)(0.9,1.0);
 END_FUZZIFY
 
 FUZZIFY ent
-	TERM baixo := (0.0,1.0)(0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000073,0); 
-	TERM medio := (0.00165,0.0)(0.002984,1.0)(0.003,0);
-	TERM alto  := (0.002984,0)(0.003,1.0);
+	TERM baixo := (0.0,1.0)(0.00165,0);
+	TERM medio := (0.0,0.0)(0.00165,1.0)(0.003,0);
+	TERM alto  := (0.00165,0)(0.0033,1.0);
 END_FUZZIFY
 
 FUZZIFY brt
-	TERM baixo := (0.0, 1.0)(12.0,0.0); 
-	TERM medio := (3.0, 0.0)(12.0,1.0)(22.0,0.0);
-	TERM alto  := (12.0,0.0)(25.0,1.0);
+	TERM baixo := (0.0, 1.0)(12.5,0.0);
+	TERM medio := (3.0, 0.0)(12.5,1.0)(22.0,0.0);
+	TERM alto  := (12.5,0.0)(25.0,1.0);
 END_FUZZIFY
 	
-DEFUZZIFY tc			
-	TERM normal := (0.0, 1.0)(0.5, 0.0);
-	TERM ataque := (0.5, 0.0)(1.0, 1.0);
+DEFUZZIFY tc
+	TERM normal := (0.0, 1.0)(1.0, 0.0);
+	TERM ataque := (0.0, 0.0)(1.0, 1.0);
 	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
 END_DEFUZZIFY
 
 RULEBLOCK No1
 	AND : MIN;	// Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgans Law)
-	ACT : MIN;	// Use 'min' activation method
+	ACT : PROD;
 	ACCU : MAX;	// Use 'max' accumulation method
 
 	RULE 1 : IF hst IS baixo AND ent IS baixo AND brt IS baixo THEN tc IS normal;
 	RULE 2 : IF hst IS baixo AND ent IS baixo AND brt IS medio THEN tc IS normal;
 	RULE 3 : IF hst IS baixo AND ent IS baixo AND brt IS alto THEN tc IS normal;
 	RULE 4 : IF hst IS baixo AND ent IS medio AND brt IS baixo THEN tc IS normal;
-	RULE 5 : IF hst IS baixo AND ent IS medio AND brt IS medio THEN tc IS normal; 
+	RULE 5 : IF hst IS baixo AND ent IS medio AND brt IS medio THEN tc IS normal;
 	RULE 6 : IF hst IS baixo AND ent IS medio AND brt IS alto THEN tc IS ataque;
 	RULE 7 : IF hst IS baixo AND ent IS alto AND brt IS baixo THEN tc IS ataque;
-	RULE 8 : IF hst IS baixo AND ent IS alto AND brt IS medio THEN tc IS ataque; 
+	RULE 8 : IF hst IS baixo AND ent IS alto AND brt IS medio THEN tc IS ataque;
 	RULE 9 : IF hst IS baixo AND ent IS alto AND brt IS alto THEN tc IS ataque;
 	RULE 10 : IF hst IS medio AND ent IS baixo AND brt IS baixo THEN tc IS normal;
 	RULE 11 : IF hst IS medio AND ent IS baixo AND brt IS medio THEN tc IS normal;
 	RULE 12 : IF hst IS medio AND ent IS baixo AND brt IS alto THEN tc IS ataque;
 	RULE 13 : IF hst IS medio AND ent IS medio AND brt IS baixo THEN tc IS normal;
-	RULE 14 : IF hst IS medio AND ent IS medio AND brt IS medio THEN tc IS ataque; 
+	RULE 14 : IF hst IS medio AND ent IS medio AND brt IS medio THEN tc IS ataque;
 	RULE 15 : IF hst IS medio AND ent IS medio AND brt IS alto THEN tc IS normal;
 	RULE 16 : IF hst IS medio AND ent IS alto AND brt IS baixo THEN tc IS normal;
-	RULE 17 : IF hst IS medio AND ent IS alto AND brt IS medio THEN tc IS ataque; 
+	RULE 17 : IF hst IS medio AND ent IS alto AND brt IS medio THEN tc IS ataque;
 	RULE 18 : IF hst IS medio AND ent IS alto AND brt IS alto THEN tc IS ataque;
 	RULE 19 : IF hst IS alto AND ent IS baixo AND brt IS baixo THEN tc IS normal;
 	RULE 20 : IF hst IS alto AND ent IS baixo AND brt IS medio THEN tc IS ataque;
@@ -65,7 +65,7 @@ RULEBLOCK No1
 	RULE 23 : IF hst IS alto AND ent IS medio AND brt IS medio THEN tc IS ataque; 
 	RULE 24 : IF hst IS alto AND ent IS medio AND brt IS alto THEN tc IS ataque;
 	RULE 25 : IF hst IS alto AND ent IS alto AND brt IS baixo THEN tc IS ataque;
-	RULE 26 : IF hst IS alto AND ent IS alto AND brt IS medio THEN tc IS ataque; 
+	RULE 26 : IF hst IS alto AND ent IS alto AND brt IS medio THEN tc IS ataque;
 	RULE 27 : IF hst IS alto AND ent IS alto AND brt IS alto THEN tc IS ataque;
 
 END_RULEBLOCK

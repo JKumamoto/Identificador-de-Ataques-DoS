@@ -1,3 +1,5 @@
+import java.util.Scanner;
+import java.io.File;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.plot.JDialogFis;
 
@@ -11,10 +13,12 @@ public class DOS_ataque{
         JDialogFis jdf = new JDialogFis(fis, 800, 600);
         
 		Escritor saida=new Escritor("files/saida.csv");
+		Scanner scan=new Scanner(new File("files/entrada.txt"));
 
-			bitrate=5.33;
-			entropia=0.0000058996;
-			hurst=0.5264;
+		while(scan.hasNext()){
+			bitrate=Double.parseDouble(scan.next());
+			entropia=Double.parseDouble(scan.next());
+			hurst=Double.parseDouble(scan.next());
 
             // Evaluate system using these parameters
             fis.getVariable("hst").setValue(hurst);
@@ -30,6 +34,8 @@ public class DOS_ataque{
 
 			saida.write(bitrate+"", entropia+"", hurst+"", tc+"");
 
+			Thread.sleep(1000);
+		}
 		saida.close();
         System.out.println("Final da execução do loop da geração dos valores do controlador fuzzy.");            
     }
