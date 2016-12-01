@@ -9,7 +9,7 @@ public class DOS_ataque{
 		double bitrate, entropia, hurst, tc;
 		boolean traffic;
 
-        System.out.println("O sistema ira ler 3 logs diferentes, e imprimir os resultados na saida padrão e nos arquivos de siada .csv, cada um correspondente aos cenarios descritos no artigo");            
+		System.out.println("O sistema ira ler 3 logs diferentes, e imprimir os resultados na saida padrão e nos arquivos de saida .csv, cada um correspondente aos cenarios descritos no artigo");            
         
         String fileName = "fcl/dos_attack.fcl";
         FIS fis = FIS.load(fileName, true);
@@ -46,7 +46,7 @@ public class DOS_ataque{
 
 				saida.write(bitrate+"", entropia+"", hurst+"", tc+"");
 
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 			}
 			saida.close();
 		}

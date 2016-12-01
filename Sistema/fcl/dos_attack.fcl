@@ -29,15 +29,15 @@ FUZZIFY brt
 END_FUZZIFY
 	
 DEFUZZIFY tc
-	TERM normal := (0.0, 1.0)(0.5, 0.0);
-	TERM ataque := (0.5, 0.0)(1.0, 1.0);
+	TERM normal := (0.0, 1.0)(0.55, 0.0);
+	TERM ataque := (0.45, 0.0)(1.0, 1.0);
 	METHOD : COG;
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
 END_DEFUZZIFY
 
 RULEBLOCK No1
 	AND : MIN;	// Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgans Law)
-	ACT : PROD;
+	ACT : MIN;
 	ACCU : MAX;	// Use 'max' accumulation method
 
 	RULE 1 : IF hst IS baixo AND ent IS baixo AND brt IS baixo THEN tc IS normal;
