@@ -17,9 +17,9 @@ FUZZIFY hst
 END_FUZZIFY
 
 FUZZIFY ent
-	TERM baixo := (0.0,1.0)(0.00165,0);
-	TERM medio := (0.0,0.0)(0.00165,1.0)(0.003,0);
-	TERM alto  := (0.00165,0)(0.0033,1.0);
+	TERM baixo := (0.0,1.0)(0.002,0);
+	TERM medio := (0.0,0.0)(0.002,1.0)(0.004,0);
+	TERM alto  := (0.002,0)(0.004,1.0);
 END_FUZZIFY
 
 FUZZIFY brt
@@ -29,9 +29,9 @@ FUZZIFY brt
 END_FUZZIFY
 	
 DEFUZZIFY tc
-	TERM normal := (0.0, 1.0)(1.0, 0.0);
-	TERM ataque := (0.0, 0.0)(1.0, 1.0);
-	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	TERM normal := (0.0, 1.0)(0.5, 0.0);
+	TERM ataque := (0.5, 0.0)(1.0, 1.0);
+	METHOD : COG;
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
 END_DEFUZZIFY
 
